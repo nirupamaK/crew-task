@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: default
+  labels:
+    app: mysql
+spec:
+  replicas: {{ .Values.mysql.replicaCount }}
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}"
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "{{ .Values.mysql.rootPassword }}"
+          - name: MYSQL_DATABASE
+            value: "{{ .Values.mysql.dbName }}"
+        ports:
+          - containerPort: {{ .Values.mysql.service.port }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crew-app-deployment
+  namespace: default
+  labels:
+    app: crew-app
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: crew-app
+  template:
+    metadata:
+      labels:
+        app: crew-app
+    spec:
+      initContainers:
+        - name: wait-for-mysql
+          image: busybox:1.35
+          command:
+            - /bin/sh
+            - -c
+            - >
+              until nc -z -v -w30 mysql-service 3306; do
+                echo "Waiting for MySQL to be ready...";
+                sleep 5;
+              done;
+              echo "MySQL is up!";
+      containers:
+        - name: crew-app
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "{{ .Values.app.env.SPRING_DATASOURCE_URL }}"
+            - name: SPRING_DATASOURCE_WRITER_URL
+              value: "{{ .Values.app.env.SPRING_DATASOURCE_WRITER_URL }}"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "{{ .Values.app.env.SPRING_DATASOURCE_USERNAME }}"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "{{ .Values.app.env.SPRING_DATASOURCE_PASSWORD }}"
+          ports:
+            - containerPort: 8080
+              name: crew-app-port
+
