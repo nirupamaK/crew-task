@@ -6,8 +6,6 @@ WORKDIR /app
 
 RUN git clone https://github.com/crewmeister/devops-coding-challenge.git .
 
-#COPY ../../app/ .
-
 RUN mvn clean install -DskipTests
 
 FROM openjdk:17-slim
