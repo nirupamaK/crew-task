@@ -69,6 +69,23 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: "{{ .Values.app.env.SPRING_DATASOURCE_PASSWORD }}"
           ports:
-            - containerPort: 8080
+            - containerPort: {{ .Values.app.service.port }}
               name: crew-app-port
+      
+      livenessProbe:
+        httpGet:
+          path: /user
+          port: {{ .Values.app.service.port }}
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 3
+      readinessProbe:
+        httpGet:
+          path: /user
+          port: {{ .Values.app.service.port }}
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        timeoutSeconds: 3
+        failureThreshold: 3
 
