@@ -6,7 +6,7 @@
 * For testing against latest vulnerabilities are present.
 `docker scout dockerfile ./Dockerfile`
 `docker scout image nirupamak/crew-app:latest --severity high`
-* The basic container Health-check is configured in `crew-app/templates/deployment.yaml` for the POD health checks.
+* The basic container Health-check is configured in `crew-app/templates/deployment.yaml` for the POD health checks (`livenessProbe` and `readinessProbe` for app container).
 
 #### To deploy docker image locally.
 1. `cd docker`  
@@ -58,6 +58,4 @@ For example:
     `http://127.0.0.1:8080/user?id=2`
     `http://127.0.0.1:8080/user?id=3`
     
-
-
 ### 3. GCP-terraform
