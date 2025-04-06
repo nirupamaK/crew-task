@@ -50,12 +50,12 @@ The app should be available on browser at `http://127.0.0.1:8080`.
 
 2. Run few curl POST commands to access add few entries in application:
 For example:
-    `curl -X POST http://127.0.0.1:8080/user -H "Content-Type: application/json" -d '{"name": "marie"}'`
-    `curl -X POST http://127.0.0.1:8080/user -H "Content-Type: application/json" -d '{"name": "tim"}'`  
+* `curl -X POST http://127.0.0.1:8080/user -H "Content-Type: application/json" -d '{"name": "marie"}'`
+* `curl -X POST http://127.0.0.1:8080/user -H "Content-Type: application/json" -d '{"name": "tim"}'`  
 
 For GET request open URL in web browser:
 For example:
-    `http://127.0.0.1:8080/user?id=2`
-    `http://127.0.0.1:8080/user?id=3`
+* `http://127.0.0.1:8080/user?id=2`
+* `http://127.0.0.1:8080/user?id=3`
     
 ### 3. GCP-terraform
