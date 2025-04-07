@@ -59,3 +59,15 @@ For example:
 * `http://127.0.0.1:8080/user?id=3`
     
 ### 3. GCP-terraform
+
+1. The GCP-terraform comtains terraform to deploy kubernetes cluster on Google Cloud Platform. 
+2. It deploying the same `crew-task-app` helm-chart same as on minikube. 
+
+#### To deploy app on GCP
+1. `cd GCP-terraform`  
+2. `terraform init`
+3. `terraform plan`
+4. `terraform apply`
+5. type `yes`
+
+##### Notes: This soloution is un-tested. However `terraform plan` works well. The  `terraform apply` is untested cause of lack of GCP accesses. 
