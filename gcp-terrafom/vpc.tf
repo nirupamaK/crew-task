@@ -7,7 +7,7 @@ resource "google_compute_subnetwork" "master_subnet" {
   name          = "master-subnet"
   region        = "us-central1"
   network       = google_compute_network.vpc.id
-  ip_cidr_range = "192.168.0.0/16"
+  ip_cidr_range = "192.168.1.0/24"
   private_ip_google_access = true
 }
 
@@ -15,7 +15,7 @@ resource "google_compute_subnetwork" "worker_subnet" {
   name          = "worker-subnet"
   region        = "us-central1"
   network       = google_compute_network.vpc.id
-  ip_cidr_range = "192.168.0.0/24"
+  ip_cidr_range = "192.168.2.0/24"
   private_ip_google_access = true
 }
 
