@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-deployment
-  namespace: default
+  namespace: "kube-system"
   labels:
     app: mysql
 spec:
@@ -31,7 +31,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: crew-app-deployment
-  namespace: default
+  namespace: "kube-system"
   labels:
     app: crew-app
 spec:

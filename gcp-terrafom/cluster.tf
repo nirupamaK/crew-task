@@ -30,7 +30,7 @@ resource "google_container_node_pool" "node_pool" {
     machine_type = "e2-medium"
     disk_size_gb = 50
     oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform",  # Allows access to all Google Cloud services
+      "https://www.googleapis.com/auth/cloud-platform",
     ]
 
     image_type = "COS"  # Container-Optimized OS

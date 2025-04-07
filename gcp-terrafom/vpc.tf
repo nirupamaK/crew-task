@@ -51,6 +51,18 @@ resource "google_compute_firewall" "allow_ssh" {
   source_ranges = ["0.0.0.0/0"]
 }
 
+resource "google_compute_firewall" "allow_service_endpoint" {
+  name    = "allow-service-endpoint"
+  network = google_compute_network.vpc.id
+
+  allow {
+    protocol = "tcp"
+    ports    = ["8080"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
+
 resource "google_compute_firewall" "allow_k8s_api" {
   name    = "allow-k8s-api"
   network = google_compute_network.vpc.id
