@@ -48,14 +48,14 @@ resource "google_container_node_pool" "node_pool" {
 }
 
 resource "google_project_iam_member" "gke_service_account_roles" {
-  project = "nak-project"
+  project = "my-project"
 
   role   = "roles/container.clusterAdmin"
   member = "serviceAccount:${google_service_account.gke_service_account.email}"
 }
 
 resource "google_project_iam_member" "gke_node_pool_roles" {
-  project = "nak-project"
+  project = "my-project"
 
   role   = "roles/container.nodeAdmin"
   member = "serviceAccount:${google_service_account.gke_service_account.email}"
