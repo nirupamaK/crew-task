@@ -75,6 +75,6 @@ resource "google_project_service" "gke_services" {
     "monitoring.googleapis.com"
   ])
 
-  project = "nak-project"
+  project = "my-project"
   service = each.key
 }
