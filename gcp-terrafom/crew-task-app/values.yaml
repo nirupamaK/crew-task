@@ -1,0 +1,43 @@
+app:
+  image:
+    repository: nirupamak/crew-app
+    tag: latest
+  replicaCount: 1
+  service:
+    name: crew-app-service
+    type: NodePort
+    nodePort: 30080
+    port: 8080
+  
+  env:
+    SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/challenge?createDatabaseIfNotExist=true
+    SPRING_DATASOURCE_WRITER_URL: jdbc:mysql://mysql-service:3306/challenge?createDatabaseIfNotExist=true
+    SPRING_DATASOURCE_USERNAME: root
+    SPRING_DATASOURCE_PASSWORD: 'Secret123'
+
+mysql:
+  image:
+    repository: mysql
+    tag: 8.0
+  replicaCount: 1
+  rootPassword: 'Secret123'
+  dbName: challenge
+  service:
+    name: mysql-service
+    type: ClusterIP
+    port: 3306
+
+resources:
+  limits:
+    memory: "4Gi"
+    cpu: "4"
+  requests:
+    memory: "2Gi"
+    cpu: "2"
+
+ingress:
+  enabled: true
+  hosts:
+    - host: "crew-app.local"
+      paths:
+        - /
